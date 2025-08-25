@@ -8,7 +8,7 @@ This project, developed by Aahash Kamble, is a comprehensive CRM analytics pipel
 ## 🧭 Architecture Diagram
 
 !Pizza Chain Insights Architecture
-
+ 
 ## 🏗️ Architecture
 The project follows a Lambda Architecture with the following layers:
 - **Extract Layer**: Real-time and batch data ingestion using AWS Kinesis and Python scripts.
