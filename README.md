@@ -8,6 +8,10 @@ This project, developed by Aahash Kamble, is a comprehensive CRM analytics pipel
 ## 🧭 Architecture Diagram
 
 ![Pizza Chain Insights Architecture](images/Pizza Chain Insights Architecture.png)
+
+## 🧭 Architecture Diagram
+
+![Pizza Chain Insights Architecture](images/Pizza%20Chain%20Insights%20Architecture.png)
  
 ## 🏗️ Architecture
 The project follows a Lambda Architecture with the following layers:
