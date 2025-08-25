@@ -4,11 +4,6 @@
 ## 📦 Project Overview
 This project, developed by Aahash Kamble, is a comprehensive CRM analytics pipeline for FutureCart Inc., a retail and e-commerce company. It leverages AWS services and big data tools to process customer interaction data in both real-time and batch modes, enabling the generation of actionable KPIs.
 
-
-## 🧭 Architecture Diagram
-
-![Pizza Chain Insights Architecture](images/Pizza Chain Insights Architecture.png)
-
 ## 🧭 Architecture Diagram
 
 ![Pizza Chain Insights Architecture](images/Pizza%20Chain%20Insights%20Architecture.png)
