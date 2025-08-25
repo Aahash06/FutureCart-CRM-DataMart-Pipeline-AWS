@@ -1,0 +1,84 @@
+✅ 📦 MySQL Setup & Data Load (EC2 Instance)
+
+# 1. Update packages and install MariaDB (MySQL-compatible)
+sudo yum update -y
+sudo yum install -y mariadb-server
+
+# 2. Start and enable MariaDB service
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+
+-- 3. Create MySQL table: `calendar_details`
+CREATE TABLE calendar_details (
+  calendar_date DATE,
+  date_desc VARCHAR(50),
+  week_day_nbr SMALLINT,
+  week_number SMALLINT,
+  week_name VARCHAR(50),
+  year_week_number INT,
+  month_number SMALLINT,
+  month_name VARCHAR(50),
+  quarter_number SMALLINT,
+  quarter_name VARCHAR(50),
+  half_year_number SMALLINT,
+  half_year_name VARCHAR(50),
+  geo_region_cd CHAR(2)
+);
+
+-- 4. Load data from local file into MySQL
+LOAD DATA LOCAL INFILE '/home/ec2-user/dimensions/futurecart_calendar_details.txt'
+INTO TABLE calendar_details
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+✅ 🚀 Move Dimension Data to Hadoop (EMR)
+# 5. Copy dimension files from S3 to local EC2
+aws s3 cp s3://aahash-project/dimensions/ ~/futurecart_dims/ --recursive
+# 6. Create HDFS directory
+hadoop fs -mkdir -p /user/ec2-user/futurecart_dims
+# 7. Upload local text files to HDFS
+hadoop fs -put ~/futurecart_dims/*.txt /user/ec2-user/futurecart_dims/
+
+
+✅ 🐝 Create Hive External Table (EMR Master Node)
+-- 8. Create Hive external table for calendar_details
+CREATE EXTERNAL TABLE calendar_details (
+  calendar_date STRING,
+  date_desc STRING,
+  week_day_nbr INT,
+  week_number INT,
+  week_name STRING,
+  year_week_number STRING,
+  month_number INT,
+  month_name STRING,
+  quarter_number INT,
+  quarter_name STRING,
+  half_year_number INT,
+  half_year_name STRING,
+  geo_region_cd STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE
+LOCATION 'hdfs:///user/ec2-user/futurecart_dims/calendar_details';
+
+✅ 📤 Export JSON from HDFS & Upload to S3
+# 9. Fetch JSON outputs from HDFS to EC2 local
+hadoop fs -get /user/ec2-user/futurecart_json/calendar/ ~/calendar_json/
+# 10. Upload JSON output to S3
+aws s3 cp ~/calendar_json/ s3://aahash-project/dimensions/calendar_json/ --recursive
+
+✅ 📂 Scripts Setup & Historical Data Generation
+# 11. Create a scripts directory locally
+mkdir -p ~/scripts
+# 12. Copy all pipeline scripts from S3 to EC2
+aws s3 cp s3://aahash-project/scripts/ ~/scripts/ --recursive
+# 13. Run Python script to generate historical data
+cd ~/scripts
+python3 generate_historical_data.py
+
+✅ 📤 Upload Historical Data to EC2 from S3
+# 14. Copy generated historical data back from S3 (if already uploaded)
+aws s3 cp s3://aahash-project/historical_data/ ~/historical_data/ --recursive

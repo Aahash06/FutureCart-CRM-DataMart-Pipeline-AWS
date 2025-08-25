@@ -1,0 +1,26 @@
+call_center_id	call_center_vendor	location	country
+C-101	Concentrix	New york	US
+C-102	DialAmerica	New york	US
+C-103	Genpact	Bangalore	IN
+C-104	Hinduja Global Solutions	Bangalore	IN
+C-105	Wipro Ltd	Hyderabad	IN
+C-106	TELUS International	Noida	IN
+C-107	Tech Mahindra	Noida	IN
+C-108	Sitel	Virginia	US
+C-109	One World Direct	Minnesota	US
+C-110	NCO Group	Guam	US
+C-111	Convergys Corporation	Phillipines	PH
+C-112	WNS Global Services	Bangalore	IN
+C-113	Concentrix	Hyderabad	IN
+C-114	DialAmerica	Ottawa	CA
+C-115	Genpact	London	GB
+C-116	Hinduja Global Solutions	Hyderabad	IN
+C-117	Wipro Ltd	Kolkata	IN
+C-118	TELUS International	Vancouver	CA
+C-119	Tech Mahindra	Bangalore	IN
+C-120	Sitel	Toronto	CA
+C-121	One World Direct	California	US
+C-122	NCO Group	Bangalore	IN
+C-123	Convergys Corporation	Bangalore	IN
+C-124	WNS Global Services	Hyderabad	IN
+C-125	Concentrix	Bangalore	IN
